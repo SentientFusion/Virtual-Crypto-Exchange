@@ -1,11 +1,20 @@
 body {
     font-family: Arial, sans-serif;
+    /* Existing background color (kept as a fallback) */
     background-color: #f0f0f0;
     text-align: center;
+
+    /* --- Add these lines for the background image --- */
+    background-image: url('background.png'); /* Replace with the correct path to your image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-size: cover; /* Scales the image to cover the entire body */
+    background-position: center center; /* Centers the image */
+    background-attachment: fixed; /* Makes the background image stay fixed when scrolling */
+    /* ------------------------------------------------ */
 }
 
 h1 {
-    background-color: #4c53af;
+    background-color: #4caf93;
     color: white;
     padding: 20px;
 }
@@ -23,7 +32,7 @@ th, td {
 }
 
 th {
-    background-color: #4c53af;
+    background-color: #4caf93;
     color: white;
 }
 
