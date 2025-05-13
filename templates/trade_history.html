@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Your Trade History</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Action</th>
+                <th>Amount</th>
+                <th>Price (USDT)</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for symbol, action, amount, price, timestamp in history %}
+            <tr>
+                <td>{{ symbol }}</td>
+                <td>{{ action }}</td>
+                <td>{{ amount }}</td>
+                <td>{{ price }}</td>
+                <td>{{ timestamp }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ url_for('index') }}">Back to Trading</a>
+</body>
+</html>

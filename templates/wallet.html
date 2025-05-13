@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Wallet</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Your Wallet</h1>
+    <div>
+        <strong>USDT Balance: </strong> {{ balance }} USDT
+        <br>
+        <strong>Current Wallet Value: </strong> {{ wallet_value }} USDT
+    </div>
+    <h2>Crypto Holdings</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Amount</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for holding in holdings %}
+            <tr>
+                <td>{{ holding[0] }}</td>
+                <td>{{ holding[1] }}</td>
+                <td>
+                    <form action="{{ url_for('sell') }}" method="POST">
+                        <input type="hidden" name="symbol" value="{{ holding[0] }}">
+                        <input type="number" name="amount" min="0" max="{{ holding[1] }}" step="0.0001" placeholder="Amount to sell" required>
+                        <button type="submit">Sell</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h2>Buy Crypto</h2>
+    <form action="{{ url_for('buy') }}" method="POST">
+        <input type="text" name="symbol" placeholder="Enter crypto symbol (e.g., BTCUSDT)" required>
+        <input type="number" name="amount" min="0" step="0.0001" placeholder="Amount to buy" required>
+        <button type="submit">Buy</button>
+    </form>
+    <br>
+    <a href="{{ url_for('trade_history') }}">View Trade History</a>
+    <br>
+    <a href="{{ url_for('login') }}">Logout</a>
+</body>
+</html>

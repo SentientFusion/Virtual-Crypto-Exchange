@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Trading Sim</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Crypto Trading Simulator</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Price (USDT)</th>
+                <th>Buy</th>
+                <th>Sell</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for symbol, price in prices.items() %}
+            <tr>
+                <td>{{ symbol }}</td>
+                <td>{{ price }}</td>
+                <td>
+                    <form action="{{ url_for('buy') }}" method="POST">
+                        <input type="hidden" name="symbol" value="{{ symbol }}">
+                        <input type="number" name="amount" placeholder="Amount" step="0.0001" required>
+                        <button type="submit">Buy</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="{{ url_for('sell') }}" method="POST">
+                        <input type="hidden" name="symbol" value="{{ symbol }}">
+                        <input type="number" name="amount" placeholder="Amount" step="0.0001" required>
+                        <button type="submit">Sell</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ url_for('wallet') }}">View Wallet</a> | 
+    <a href="{{ url_for('trade_history') }}">Trade History</a>
+</body>
+</html>
